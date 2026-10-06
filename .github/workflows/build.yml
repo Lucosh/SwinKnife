@@ -1,0 +1,29 @@
+# Controllo a ogni push e pull request: compila e verifica che le traduzioni siano complete.
+name: Build
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Compila
+        run: dotnet build src/SwinKnife/SwinKnife.csproj -c Release --nologo
+
+      - name: Traduzioni
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tools/i18n/check.py

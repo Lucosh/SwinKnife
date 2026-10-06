@@ -1,0 +1,6 @@
+<Project>
+  <!-- bin/obj fuori da OneDrive: le librerie native (ImageMagick, PDFium, WebView2) pesano centinaia di MB -->
+  <PropertyGroup>
+    <ArtifactsPath>$(LOCALAPPDATA)\SwinKnife\artifacts</ArtifactsPath>
+  </PropertyGroup>
+</Project>

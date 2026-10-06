@@ -1,0 +1,132 @@
+<UserControl x:Class="SwinKnife.Pages.RecoveryPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:SwinKnife.Core"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    <Grid Margin="24,18,24,14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,12">
+            <TextBlock Text="{l:T 'Recupero file'}" Style="{StaticResource PageTitle}" />
+            <TextBlock Style="{StaticResource PageSubtitle}"
+                       Text="{l:T 'Cerca foto, documenti, audio e video eliminati da chiavette USB, schede SD e dischi, anche dopo una formattazione. Il supporto viene solo letto, mai modificato.'}" />
+        </StackPanel>
+
+        <Border Grid.Row="1" Style="{StaticResource InfoBanner}">
+            <TextBlock TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorPrimaryBrush}">
+                <Run FontWeight="SemiBold" Text="{l:T 'Consigli importanti: '}" /><Run Text="{l:T 'smetti subito di usare il supporto (ogni nuovo file può sovrascrivere quelli eliminati) e salva i file recuperati su '}" /><Run FontWeight="SemiBold" Text="{l:T 'un\'altra unità'}" /><Run Text="{l:T '. Con la scansione profonda i nomi originali non si possono recuperare: i file vengono rinominati in base al tipo.'}" />
+            </TextBlock>
+        </Border>
+
+        <Border x:Name="AdminBanner" Grid.Row="2" Style="{StaticResource WarnBanner}" Margin="0,10,0,0">
+            <DockPanel>
+                <ui:Button DockPanel.Dock="Right" Content="{l:T 'Riavvia come amministratore'}" Icon="{ui:SymbolIcon Shield24}" Appearance="Primary" Click="Elevate_Click" />
+                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                           Text="{l:T 'Per leggere direttamente le unità servono i privilegi di amministratore. Senza, puoi comunque analizzare un file immagine disco (.img, .dd, .bin).'}" />
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Row="3" Margin="0,14,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="{l:T 'Metodo'}" VerticalAlignment="Center" Margin="0,0,0,12" />
+            <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,0,0,12">
+                <RadioButton x:Name="ModeNames" GroupName="rmode" IsChecked="True" Checked="Mode_Changed"
+                             Content="{l:T 'Rapido, con i nomi originali (file eliminati di recente)'}" />
+                <RadioButton x:Name="ModeDeep" GroupName="rmode" Margin="24,0,0,0" Checked="Mode_Changed"
+                             Content="{l:T 'Scansione profonda (anche dopo formattazione, senza nomi)'}" />
+            </StackPanel>
+            <TextBlock Grid.Row="1" Text="{l:T 'Unità da analizzare'}" VerticalAlignment="Center" />
+            <ComboBox x:Name="SourceCombo" Grid.Row="1" Grid.Column="1" DisplayMemberPath="Label" />
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="8,0,0,0">
+                <ui:Button Icon="{ui:SymbolIcon ArrowClockwise24}" ToolTip="{l:T 'Aggiorna l\'elenco delle unità'}" Style="{StaticResource IconButton}" Click="Refresh_Click" />
+                <ui:Button Content="{l:T 'Immagine disco…'}" Icon="{ui:SymbolIcon Storage24}" Margin="6,0,0,0" Click="Image_Click" />
+            </StackPanel>
+            <TextBlock x:Name="WhatLabel" Grid.Row="2" Text="{l:T 'Cosa cercare'}" VerticalAlignment="Center" Margin="0,12,0,0" />
+            <StackPanel x:Name="WhatPanel" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,12,0,0">
+                <WrapPanel x:Name="CategoryPanel" />
+                <TextBlock Text="{l:T 'Ignora file sotto'}" VerticalAlignment="Center" Margin="18,0,8,0" />
+                <ComboBox x:Name="MinSizeCombo" Width="140" ToolTip="{l:T 'Esclude miniature e icone, che sono numerosissime'}" />
+            </StackPanel>
+            <TextBlock Grid.Row="3" Text="{l:T 'Salva i file in'}" VerticalAlignment="Center" Margin="0,12,0,0" />
+            <ui:TextBox x:Name="OutBox" Grid.Row="3" Grid.Column="1" Margin="0,12,0,0" />
+            <ui:Button Grid.Row="3" Grid.Column="2" Content="…" Margin="8,12,0,0" Click="PickOut_Click" />
+        </Grid>
+
+        <DockPanel Grid.Row="4" Margin="0,16,0,10">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                <ui:Button x:Name="GoBtn" Content="{l:T 'Avvia scansione'}" Icon="{ui:SymbolIcon Search24}" Appearance="Primary" Click="Go_Click" />
+                <ui:Button x:Name="StopBtn" Content="{l:T 'Interrompi'}" Icon="{ui:SymbolIcon Stop24}" Margin="6,0,0,0" Visibility="Collapsed" Click="Stop_Click" />
+            </StackPanel>
+            <TextBlock x:Name="StatusText" DockPanel.Dock="Right" Style="{StaticResource Hint}" Margin="12,0,0,0" MinWidth="280" TextAlignment="Right" />
+            <ProgressBar x:Name="Progress" Maximum="1000" Margin="14,0,0,0" VerticalAlignment="Center" />
+        </DockPanel>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="14" />
+                <ColumnDefinition Width="330" />
+            </Grid.ColumnDefinitions>
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                    <TextBlock Text="{l:T 'Mostra'}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <ComboBox x:Name="FilterCombo" Width="180" SelectionChanged="Filter_Changed" />
+                    <TextBlock x:Name="CountText" Style="{StaticResource Hint}" HorizontalAlignment="Right" />
+                </DockPanel>
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,10,0,0">
+                    <ui:Button x:Name="RecoverSelBtn" Content="{l:T 'Recupera selezionati'}" Icon="{ui:SymbolIcon Save24}" IsEnabled="False" Click="RecoverSel_Click" />
+                    <ui:Button x:Name="RecoverAllBtn" Content="{l:T 'Recupera tutti (visibili)'}" Icon="{ui:SymbolIcon SaveCopy24}" Appearance="Primary" Margin="6,0,0,0" IsEnabled="False" Click="RecoverAll_Click" />
+                </StackPanel>
+                <Grid>
+                <DataGrid x:Name="NameResults" IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Extended" CanUserAddRows="False"
+                          HeadersVisibility="Column" EnableRowVirtualization="True" SelectionChanged="Results_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{l:T 'Nome'}" Binding="{Binding Name}" Width="2*" />
+                        <DataGridTextColumn Header="{l:T 'Cartella'}" Binding="{Binding Folder}" Width="2*" />
+                        <DataGridTextColumn Header="{l:T 'Dimensione'}" Binding="{Binding SizeText}" SortMemberPath="Size" Width="100" />
+                        <DataGridTextColumn Header="{l:T 'Modificato'}" Binding="{Binding ModifiedText}" SortMemberPath="Modified" Width="140" />
+                        <DataGridTextColumn Header="{l:T 'Stato'}" Binding="{Binding State}" Width="150" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid x:Name="Results" Visibility="Collapsed" IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Extended" CanUserAddRows="False"
+                          HeadersVisibility="Column" EnableRowVirtualization="True" SelectionChanged="Results_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="#" Binding="{Binding Number}" Width="60" />
+                        <DataGridTextColumn Header="{l:T 'Tipo'}" Binding="{Binding Type}" Width="70" />
+                        <DataGridTextColumn Header="{l:T 'Categoria'}" Binding="{Binding Category}" Width="110" />
+                        <DataGridTextColumn Header="{l:T 'Dimensione'}" Binding="{Binding SizeText}" SortMemberPath="Size" Width="100" />
+                        <DataGridTextColumn Header="{l:T 'Posizione sul disco'}" Binding="{Binding OffsetText}" SortMemberPath="Offset" Width="160" />
+                        <DataGridTextColumn Header="{l:T 'Stato'}" Binding="{Binding State}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                </Grid>
+            </DockPanel>
+            <Border Grid.Column="2" Style="{StaticResource Panel}">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="{l:T 'Anteprima'}" Style="{StaticResource SectionTitle}" />
+                    <TextBlock x:Name="PreviewInfo" DockPanel.Dock="Bottom" Style="{StaticResource Hint}" Margin="0,10,0,0" />
+                    <Grid>
+                        <ui:SymbolIcon x:Name="PreviewIcon" Symbol="Image24" FontSize="72" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                        <Image x:Name="PreviewImage" Stretch="Uniform" />
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

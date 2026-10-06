@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <ApplicationIcon>Assets\swinknife.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>SwinKnife</AssemblyName>
+    <RootNamespace>SwinKnife</RootNamespace>
+    <Version>0.4.0</Version>
+    <Product>SwinKnife</Product>
+    <Description>Il coltellino svizzero per Windows</Description>
+    <SatelliteResourceLanguages>it;en;de;es;fr</SatelliteResourceLanguages>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WPF-UI" Version="4.3.0" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="14.17.2" />
+    <PackageReference Include="bblanchon.PDFium.Win32" Version="157.0.8086" />
+    <PackageReference Include="PDFsharp" Version="6.2.4" />
+    <PackageReference Include="ClosedXML" Version="0.105.1" />
+    <PackageReference Include="Markdig" Version="1.4.0" />
+    <PackageReference Include="SharpCompress" Version="1.0.0" />
+    <PackageReference Include="AvalonEdit" Version="6.3.1.120" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4258.31" />
+    <PackageReference Include="QRCoder" Version="1.8.0" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" />
+    <PackageReference Include="System.Management" Version="10.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\swinknife.png" />
+    <Resource Include="Assets\swinknife.ico" />
+    <!-- traduzioni dell'interfaccia: Lang/en.json diventa la risorsa SwinKnife.Lang.en.json -->
+    <EmbeddedResource Include="Lang\*.json" LogicalName="SwinKnife.Lang.%(Filename).json" />
+  </ItemGroup>
+
+</Project>

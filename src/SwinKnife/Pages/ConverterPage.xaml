@@ -1,0 +1,92 @@
+<UserControl x:Class="SwinKnife.Pages.ConverterPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:SwinKnife.Core"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    <Grid Margin="24,18,24,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,16">
+            <TextBlock Text="{l:T 'Converti file'}" Style="{StaticResource PageTitle}" />
+            <TextBlock Style="{StaticResource PageSubtitle}"
+                       Text="{l:T 'Aggiungi uno o più file dello stesso tipo, scegli il formato di arrivo e premi Converti. Gli originali non vengono modificati.'}" />
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="420" />
+            </Grid.ColumnDefinitions>
+
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+                    <ui:Button Content="{l:T 'Aggiungi file…'}" Icon="{ui:SymbolIcon Add24}" Click="Add_Click" />
+                    <ui:Button Content="{l:T 'Rimuovi'}" Icon="{ui:SymbolIcon Subtract24}" Margin="6,0,0,0" Click="Remove_Click" />
+                    <ui:Button Content="{l:T 'Svuota'}" Icon="{ui:SymbolIcon Delete24}" Margin="6,0,0,0" Click="Clear_Click" />
+                </StackPanel>
+                <Grid>
+                    <Border Style="{StaticResource DropZone}" x:Name="DropHint">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ui:SymbolIcon Symbol="ArrowDownload24" FontSize="40" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                            <TextBlock Margin="0,12,0,0" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       Text="{l:T 'Trascina qui i file (o una cartella) da convertire'}" />
+                        </StackPanel>
+                    </Border>
+                    <ListBox x:Name="FileList" SelectionMode="Extended" Background="Transparent" BorderThickness="0" AllowDrop="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="2,3">
+                                    <ui:SymbolIcon Symbol="{Binding Icon}" FontSize="20" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="14" />
+                                    <TextBlock Text="{Binding Info}" VerticalAlignment="Center" Margin="14,0,0,0"
+                                               Style="{StaticResource Hint}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </DockPanel>
+
+            <Border Grid.Column="2" Style="{StaticResource Panel}" Padding="0">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Bottom" Margin="18,10,18,18">
+                        <TextBlock x:Name="StatusLabel" TextWrapping="Wrap" Margin="0,0,0,8"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        <ProgressBar x:Name="Progress" Maximum="1000" Visibility="Collapsed" Margin="0,0,0,10" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:Button x:Name="CancelBtn" Content="{l:T 'Annulla'}" Visibility="Collapsed" Margin="0,0,8,0" Click="Cancel_Click" />
+                            <ui:Button x:Name="GoBtn" Grid.Column="1" Content="{l:T 'Converti'}" Icon="{ui:SymbolIcon ArrowSwap24}"
+                                       Appearance="Primary" HorizontalAlignment="Stretch" Height="40" IsEnabled="False" Click="Go_Click" />
+                        </Grid>
+                        <ui:Button x:Name="OpenOutBtn" Content="{l:T 'Apri cartella dei risultati'}" Icon="{ui:SymbolIcon FolderOpen24}"
+                                   HorizontalAlignment="Stretch" Margin="0,8,0,0" Visibility="Collapsed" Click="OpenOut_Click" />
+                    </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Margin="18">
+                            <TextBlock Text="{l:T 'Converti in'}" Style="{StaticResource SectionTitle}" />
+                            <ComboBox x:Name="TargetCombo" DisplayMemberPath="Label" SelectionChanged="Target_Changed" />
+                            <TextBlock x:Name="NoTargetText" Style="{StaticResource Hint}" Margin="0,8,0,0" />
+                            <TextBlock x:Name="OptionsTitle" Text="{l:T 'Opzioni'}" Style="{StaticResource SectionTitle}" Margin="0,22,0,8" />
+                            <StackPanel x:Name="OptionsPanel" />
+                            <TextBlock Text="{l:T 'Dove salvare'}" Style="{StaticResource SectionTitle}" Margin="0,22,0,8" />
+                            <RadioButton x:Name="SameDir" Content="{l:T 'Nella stessa cartella dell\'originale'}" IsChecked="True" GroupName="out" />
+                            <RadioButton x:Name="OtherDir" Content="{l:T 'In un\'altra cartella:'}" GroupName="out" Margin="0,6,0,6" />
+                            <DockPanel>
+                                <ui:Button DockPanel.Dock="Right" Content="…" Margin="6,0,0,0" Click="PickOut_Click" />
+                                <ui:TextBox x:Name="OutDirBox" />
+                            </DockPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

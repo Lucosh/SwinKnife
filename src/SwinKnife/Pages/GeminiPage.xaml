@@ -1,0 +1,57 @@
+<UserControl x:Class="SwinKnife.Pages.GeminiPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:SwinKnife.Core"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf">
+    <Grid Margin="16,12,16,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <RadioButton x:Name="ModeWeb" Content="{l:T 'Pannello integrato'}" Style="{StaticResource SegmentButton}" GroupName="gmode" IsChecked="True" Checked="Mode_Checked" />
+                <RadioButton x:Name="ModeChrome" Content="{l:T 'Chrome (il tuo account)'}" Style="{StaticResource SegmentButton}" GroupName="gmode" Checked="Mode_Checked" />
+            </StackPanel>
+            <StackPanel x:Name="WebNav" Orientation="Horizontal" Margin="18,0,0,0">
+                <ui:Button Icon="{ui:SymbolIcon ArrowLeft24}" ToolTip="{l:T 'Indietro'}" Style="{StaticResource IconButton}" Click="Back_Click" />
+                <ui:Button Icon="{ui:SymbolIcon ArrowRight24}" ToolTip="{l:T 'Avanti'}" Style="{StaticResource IconButton}" Click="Forward_Click" />
+                <ui:Button Icon="{ui:SymbolIcon ArrowClockwise24}" ToolTip="{l:T 'Ricarica'}" Style="{StaticResource IconButton}" Click="Reload_Click" />
+                <ui:Button Icon="{ui:SymbolIcon Compose24}" ToolTip="{l:T 'Nuova chat'}" Style="{StaticResource IconButton}" Click="Home_Click" />
+                <ui:Button Icon="{ui:SymbolIcon ZoomOut24}" ToolTip="{l:T 'Riduci'}" Style="{StaticResource IconButton}" Click="ZoomOut_Click" />
+                <ui:Button Icon="{ui:SymbolIcon ZoomIn24}" ToolTip="{l:T 'Ingrandisci'}" Style="{StaticResource IconButton}" Click="ZoomIn_Click" />
+                <TextBlock x:Name="UrlText" Style="{StaticResource Hint}" VerticalAlignment="Center" Margin="10,0,0,0" />
+            </StackPanel>
+            <ui:Button x:Name="LogoutBtn" DockPanel.Dock="Right" HorizontalAlignment="Right" Content="{l:T 'Esci dall\'account'}" Icon="{ui:SymbolIcon SignOut24}" Click="Logout_Click" />
+        </DockPanel>
+
+        <Border x:Name="LoginHint" Grid.Row="1" Style="{StaticResource InfoBanner}" Margin="0,10,0,0" Visibility="Collapsed">
+            <TextBlock TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorPrimaryBrush}">
+                <Run Text="{l:T 'Accedi una sola volta con il tuo account Google: l\'accesso resta salvato. Se Google blocca l\'accesso (“browser non sicuro”), passa alla modalità '}" /><Run FontWeight="SemiBold" Text="{l:T 'Chrome'}" /><Run Text="{l:T ', che usa l\'account con cui sei già connesso in Chrome.'}" />
+            </TextBlock>
+        </Border>
+
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Border x:Name="WebPanel" CornerRadius="8" ClipToBounds="True">
+                <wv:WebView2 x:Name="Web" DefaultBackgroundColor="#1F1F23" />
+            </Border>
+            <DockPanel x:Name="ChromePanel" Visibility="Collapsed">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+                    <ui:Button x:Name="EmbedBtn" Content="{l:T 'Apri Gemini dentro SwinKnife'}" Icon="{ui:SymbolIcon Globe24}" Appearance="Primary" Click="Embed_Click" />
+                    <ui:Button x:Name="WindowBtn" Content="{l:T 'Apri in una finestra separata'}" Icon="{ui:SymbolIcon WindowNew24}" Margin="6,0,0,0" Click="Window_Click" />
+                    <ui:Button x:Name="DetachBtn" Content="{l:T 'Stacca finestra'}" Icon="{ui:SymbolIcon ArrowExportUp24}" Margin="6,0,0,0" Visibility="Collapsed" Click="Detach_Click" />
+                    <TextBlock x:Name="ChromeStatus" Style="{StaticResource Hint}" VerticalAlignment="Center" Margin="14,0,0,0" />
+                </StackPanel>
+                <Grid x:Name="ChromeArea">
+                    <Border x:Name="ChromeIntro" Style="{StaticResource DropZone}">
+                        <TextBlock x:Name="ChromeIntroText" TextWrapping="Wrap" TextAlignment="Center" MaxWidth="640" FontSize="14"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    </Border>
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</UserControl>

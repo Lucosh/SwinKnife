@@ -1,0 +1,68 @@
+# Crea una release scaricabile: basta pubblicare un tag di versione.
+#   git tag v0.4.0
+#   git push origin v0.4.0
+# In "Actions" si può anche avviare a mano per avere installer e zip come artifact, senza pubblicare nulla.
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Inno Setup
+        shell: pwsh
+        run: |
+          $found = @("$env:ProgramFiles\Inno Setup 7\ISCC.exe", "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe") | Where-Object { Test-Path $_ }
+          if (-not $found) { choco install innosetup -y --no-progress }
+
+      - name: Versione
+        id: ver
+        shell: pwsh
+        run: |
+          if ($env:GITHUB_REF_TYPE -eq 'tag') { $v = $env:GITHUB_REF_NAME.TrimStart('v') }
+          else { $v = ([xml](Get-Content src/SwinKnife/SwinKnife.csproj)).Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1 }
+          "version=$v" >> $env:GITHUB_OUTPUT
+
+      - name: Compila installer e versione portable
+        shell: pwsh
+        run: ./tools/release/build.ps1 -Version ${{ steps.ver.outputs.version }} -OutDir "$env:GITHUB_WORKSPACE/dist"
+
+      - name: Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SwinKnife-${{ steps.ver.outputs.version }}
+          path: |
+            dist/*.exe
+            dist/*.zip
+            dist/SHA256SUMS.txt
+
+      - name: Pubblica la release
+        if: github.ref_type == 'tag'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $v = '${{ steps.ver.outputs.version }}'
+          $notes = @"
+          ### Download
+          - **[SwinKnife-Setup-$v.exe](https://github.com/${{ github.repository }}/releases/download/v$v/SwinKnife-Setup-$v.exe)**: installer (recommended, no admin rights needed)
+          - [SwinKnife-$v-portable.zip](https://github.com/${{ github.repository }}/releases/download/v$v/SwinKnife-$v-portable.zip): portable, extract and run ``SwinKnife.exe``
+
+          Windows 10 (1809+) / 11, 64-bit. .NET is included, nothing else to install.
+          Windows SmartScreen may warn because the app is not code-signed: click *More info* → *Run anyway*.
+          "@
+          $files = Get-ChildItem dist -File | Where-Object Name -match '\.(exe|zip|txt)$' | ForEach-Object FullName
+          gh release create "v$v" @files --title "SwinKnife $v" --notes $notes --generate-notes

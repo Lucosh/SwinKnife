@@ -1,0 +1,11 @@
+# compilazione (di norma finisce in %LOCALAPPDATA%\SwinKnife\artifacts, vedi Directory.Build.props)
+bin/
+obj/
+artifacts/
+dist/
+*.user
+.vs/
+.vscode/*
+!.vscode/settings.json
+*_wpftmp.csproj
+__pycache__/

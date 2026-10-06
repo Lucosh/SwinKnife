@@ -1,0 +1,14 @@
+{
+  // C# Dev Kit: usa la soluzione del progetto invece di cercare da sé tutti i .csproj
+  "dotnet.defaultSolution": "SwinKnife.slnx",
+  // WPF crea e cancella questi progetti temporanei a ogni compilazione: non vanno né mostrati né seguiti
+  "files.exclude": {
+    "**/*_wpftmp.csproj": true
+  },
+  "files.watcherExclude": {
+    "**/*_wpftmp.csproj": true
+  },
+  "search.exclude": {
+    "**/*_wpftmp.csproj": true
+  }
+}

@@ -93,10 +93,14 @@ public static class Archives
                 .FirstOrDefault()
                 ?? archive.Entries.FirstOrDefault(e => !e.IsDirectory && e.IsEncrypted);
             if (entry == null) return true; // nomi cifrati: se l'elenco si apre, la password è buona
+            // leggo i dati e confronto il CRC32: indispensabile per lo ZipCrypto classico, che ha solo
+            // un controllo di 1 byte e con una password sbagliata su ~256 passerebbe (falso positivo).
+            var crc = new ICSharpCode.SharpZipLib.Checksum.Crc32();
             using var s = entry.OpenEntryStream();
             var buf = new byte[81920];
-            while (s.Read(buf, 0, buf.Length) > 0) { }
-            return true;
+            int n;
+            while ((n = s.Read(buf, 0, buf.Length)) > 0) crc.Update(new ArraySegment<byte>(buf, 0, n));
+            return entry.Crc == 0 || (uint)crc.Value == (uint)entry.Crc;
         }
         catch (OperationCanceledException) { throw; }
         catch

@@ -71,6 +71,41 @@ public static class Archives
         }
     }
 
+    // ------------------------------------------------------------------ prova password
+    /// <summary>Formati su cui si può provare una password (lo zip-crypto classico e l'AES dello zip, il 7z e il rar).</summary>
+    public static bool CanTestPassword(string path) =>
+        Path.GetExtension(path).ToLowerInvariant() is ".zip" or ".7z" or ".rar" or ".cbz" or ".cbr" or ".jar" or ".apk" or ".xpi" or ".epub";
+
+    /// <summary>
+    /// Prova una password sull'archivio: true se è quella giusta. Tutto in memoria, pensato per
+    /// essere richiamato tante volte di fila (recupero della password di un proprio archivio).
+    /// </summary>
+    public static bool TestPassword(string path, string password)
+    {
+        try
+        {
+            using var archive = ArchiveFactory.Open(path, new ReaderOptions { Password = password });
+            // il controllo affidabile è leggere davvero i dati: su una password sbagliata l'AES/CRC salta.
+            // prendo il file non vuoto più piccolo, così la verifica costa poco.
+            var entry = archive.Entries
+                .Where(e => !e.IsDirectory && e.IsEncrypted && e.Size > 0)
+                .OrderBy(e => e.Size)
+                .FirstOrDefault()
+                ?? archive.Entries.FirstOrDefault(e => !e.IsDirectory && e.IsEncrypted);
+            if (entry == null) return true; // nomi cifrati: se l'elenco si apre, la password è buona
+            using var s = entry.OpenEntryStream();
+            var buf = new byte[81920];
+            while (s.Read(buf, 0, buf.Length) > 0) { }
+            return true;
+        }
+        catch (OperationCanceledException) { throw; }
+        catch
+        {
+            // password sbagliata: a seconda del formato arriva come errore di crypto, di CRC o di "dati corrotti"
+            return false;
+        }
+    }
+
     // ------------------------------------------------------------------ estrazione
     /// <summary>Estrae l'archivio nella cartella indicata (che viene creata). Restituisce il numero di file estratti.</summary>
     public static int Extract(string path, string dest, string? password, Action<double, string> progress, CancellationToken ct)

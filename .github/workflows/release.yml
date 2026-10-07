@@ -22,11 +22,14 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Inno Setup
+      - name: Inno Setup 7 (64 bit)
         shell: pwsh
         run: |
-          $found = @("$env:ProgramFiles\Inno Setup 7\ISCC.exe", "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe") | Where-Object { Test-Path $_ }
-          if (-not $found) { choco install innosetup -y --no-progress }
+          # la versione a 64 bit: quella a 32 bit preinstallata esaurisce la memoria comprimendo l'app
+          $exe = "$env:RUNNER_TEMP\innosetup.exe"
+          Invoke-WebRequest "https://github.com/jrsoftware/issrc/releases/download/is-7_1_0/innosetup-7.1.0-x64.exe" -OutFile $exe
+          Start-Process $exe -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/CURRENTUSER','/PORTABLE=1','/NOICONS',"/DIR=$env:RUNNER_TEMP\inno" -Wait
+          "ISCC=$env:RUNNER_TEMP\inno\ISCC.exe" >> $env:GITHUB_ENV
 
       - name: Versione
         id: ver

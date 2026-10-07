@@ -6,7 +6,7 @@
   L'app è "self-contained": chi la scarica non deve installare .NET.
 
   Uso:  powershell -ExecutionPolicy Bypass -File tools\release\build.ps1 [-Version 0.4.0] [-OutDir <cartella>]
-  Serve Inno Setup 6 o 7 (https://jrsoftware.org/isdl.php); in alternativa indica ISCC.exe con la variabile ISCC.
+  Serve Inno Setup 7 a 64 bit (https://jrsoftware.org/isdl.php); in alternativa indica ISCC.exe con la variabile ISCC.
 #>
 param(
     [string]$Version,

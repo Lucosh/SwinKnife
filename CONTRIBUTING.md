@@ -17,7 +17,7 @@ Requirements: Windows 10/11 and the [.NET 10 SDK](https://dotnet.microsoft.com/d
 |---|---|
 | Run from source | `dotnet run --project src/SwinKnife` or open `SwinKnife.slnx` in Visual Studio |
 | Install your build locally | double-click `build.bat`: publishes to `%LOCALAPPDATA%\SwinKnife\app`, creates Desktop and Start menu shortcuts and starts the app |
-| Build the installer | `powershell -ExecutionPolicy Bypass -File tools\release\build.ps1` (needs [Inno Setup](https://jrsoftware.org/isdl.php) 6 or 7) |
+| Build the installer | `powershell -ExecutionPolicy Bypass -File tools\release\build.ps1` (needs [Inno Setup 7](https://jrsoftware.org/isdl.php), 64-bit) |
 
 Build output goes to `%LOCALAPPDATA%\SwinKnife\artifacts` (see `Directory.Build.props`), so a repository synced with OneDrive
 doesn't upload hundreds of MB of native libraries.

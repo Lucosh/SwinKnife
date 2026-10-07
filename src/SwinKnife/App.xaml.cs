@@ -2,6 +2,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
+using SwinKnife.Controls;
 using SwinKnife.Core;
 using SwinKnife.Dialogs;
 using Wpf.Ui.Appearance;
@@ -12,9 +13,21 @@ public partial class App : Application
 {
     public static readonly Color Accent = Color.FromRgb(0xE5, 0x48, 0x4D);
 
+    /// <summary>True quando l'app sta davvero uscendo (non solo nascondendo la finestra nell'area di notifica).</summary>
+    public static bool Exiting { get; private set; }
+
+    /// <summary>Chiude SwinKnife del tutto, anche se è attiva l'icona nell'area di notifica.</summary>
+    public static void Quit()
+    {
+        Exiting = true;
+        Current.Shutdown();
+    }
+
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        // prove automatiche dell'interfaccia: creano da sé la finestra (fuori schermo), qui non va aperto niente
+        if (Environment.GetEnvironmentVariable("SWINKNIFE_UI_TEST") == "1") return;
         // usati dall'installer: attivano/rimuovono il menu del tasto destro senza aprire la finestra
         if (e.Args.Contains("--register-shell") || e.Args.Contains("--unregister-shell"))
         {
@@ -59,7 +72,9 @@ public partial class App : Application
 
         var window = new MainWindow();
         MainWindow = window;
-        window.Show();
+        StartBackground(window);
+        // avvio con Windows: resta nell'area di notifica senza aprire la finestra
+        if (!(e.Args.Contains("--tray") && Resident.TrayEnabled)) window.Show();
         window.HandleArgs(e.Args);
         SingleInstance.Listen(args => Dispatcher.InvokeAsync(() =>
         {
@@ -75,8 +90,53 @@ public partial class App : Application
             });
     }
 
+    private static void StartBackground(MainWindow window)
+    {
+        var hotkeys = new HotkeyDef[]
+        {
+            new("text", L.T("Copia testo dallo schermo"), "Win+Shift+T", () => _ = QuickTools.CopyTextFromScreen()),
+            new("color", L.T("Contagocce"), "Win+Shift+C", QuickTools.PickColor),
+            new("ruler", L.T("Righello"), "Win+Ctrl+Shift+M", QuickTools.Ruler),
+            new("topmost", L.T("Sempre in primo piano"), "Win+Ctrl+T", QuickTools.ToggleTopmost),
+            new("clipboard", L.T("Cronologia appunti"), "Win+Alt+V", ClipboardPopup.Toggle),
+        };
+        try
+        {
+            Resident.TrayClick = () => window.BringToFront();
+            Resident.TrayMenu = () =>
+            {
+                var menu = new System.Windows.Controls.ContextMenu();
+                System.Windows.Controls.MenuItem Item(string text, Action run, string? key = null)
+                {
+                    var mi = new System.Windows.Controls.MenuItem { Header = text, InputGestureText = key ?? "" };
+                    mi.Click += (_, _) => run();
+                    menu.Items.Add(mi);
+                    return mi;
+                }
+                Item(L.T("Apri SwinKnife"), () => window.BringToFront()).FontWeight = FontWeights.SemiBold;
+                menu.Items.Add(new System.Windows.Controls.Separator());
+                foreach (var h in hotkeys) Item(h.Title, h.Run, h.Current);
+                Item(L.T("Cattura schermo"), () =>
+                {
+                    window.BringToFront();
+                    window.ShowPage("capture");
+                });
+                menu.Items.Add(new System.Windows.Controls.Separator());
+                Item(L.T("Esci da SwinKnife"), Quit);
+                return menu;
+            };
+            Resident.Start(hotkeys);
+            ClipboardHistory.Start();
+        }
+        catch (Exception ex)
+        {
+            AppInfo.Log(ex, "Avvio servizi in background");
+        }
+    }
+
     protected override void OnExit(ExitEventArgs e)
     {
+        Resident.Stop();
         L.DumpMissing();
         base.OnExit(e);
     }

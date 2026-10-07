@@ -58,14 +58,20 @@ FFmpeg (audio, video, screen recording) and 7-Zip (creating .7z archives) are do
 | Tool | What it does |
 |---|---|
 | **Open file** | Images (also HEIC, AVIF, JPEG XL, PSD, RAW, animated GIF), PDF, XPS, Word/Excel/PowerPoint/ODT, CSV and XLSX as tables, text and code with syntax highlighting, Markdown/HTML with preview, SVG, audio, video, archives, fonts; anything else in hexadecimal. File details, MD5/SHA-256 and **Ask Gemini** (summarize, explain, translate, fix mistakes). |
+| **Search files** | Finds any file or folder on all drives instantly as you type, like *Everything*: wildcards (`*.pdf`), `ext:jpg;png`, exclusions (`-draft`), filters by type. As administrator the index is built in seconds from the NTFS file table and stays updated in real time. |
 | **Convert** | Images ↔ JPG/PNG/WEBP/AVIF/JPEG XL/BMP/GIF/TIFF/ICO/PDF · Word ↔ PDF/DOCX/ODT/RTF/TXT/HTML · PDF → Word/PNG/JPG/TXT · Excel/CSV/JSON · PowerPoint → PDF/images · Markdown/HTML/TXT → PDF · audio and video · **OCR**: image → text, scanned PDF → searchable PDF. |
 | **PDF editor** | Edit existing text, add text, highlighter, whiteout, redaction, signature, drawing, notes; **fill in forms**; **OCR**; merge, split, rotate and reorder pages; watermark, page numbers, compression, AES-256 password; undo/redo. |
+| **Translate documents** | Translates whole Word, PowerPoint, Excel, PDF, text and subtitle (.srt) files into 27 languages with Google Gemini, keeping layout, styles and images (needs a free Gemini API key). |
+| **Compare** | Line-by-line differences between two files (text, code, Word, PDF…) and between two folders, with copy and sync in either direction. |
 | **Archives** | Create ZIP (AES-256 password), 7z (encrypted contents and names) and TAR.GZ; extract ZIP, 7z, RAR, TAR, GZ, BZ2, XZ, password-protected ones too. |
 
 ### Photos and screen
 | Tool | What it does |
 |---|---|
 | **Photo editor** | Like the iPhone Photos app: *Adjust* (15 sliders + Auto), *Filters*, *Crop*. Saves a copy and keeps the EXIF data. |
+| **Bulk photos** | Resizes and compresses many photos at once for e-mail, chat or web (JPG, WEBP, AVIF, PNG) and removes the GPS location or all hidden data. |
+| **Remove background** | Cuts out people, animals and objects automatically with an AI model that runs on your PC; transparent, solid-color or blurred background. |
+| **Video editor** | Trim, compress to fit WhatsApp or e-mail limits, extract the audio (MP3/M4A), make GIFs, remove the audio, rotate and join videos. |
 | **Screen capture** | Screenshots of an area, a window or the whole screen, with arrows, shapes, highlighter, text, numbered steps and pixelation for sensitive data. Screen recording to **MP4** (with microphone) or **GIF**. |
 | **Bulk rename** | Templates with `{name}`, `{num}`, `{date}` (date the photo was taken), `{time}`, `{folder}`; find and replace (regex too), letter case, extensions, accents. Preview, conflict warnings, undo. |
 
@@ -75,13 +81,23 @@ FFmpeg (audio, video, screen recording) and 7-Zip (creating .7z archives) are do
 | **Disk analyzer** | Like WinDirStat: folders by size, statistics by file type and a treemap. Skips OneDrive cloud-only files. Run as administrator for **fast mode**: it reads the NTFS file table directly, like WinDirStat and WizTree, and scans a whole disk in seconds. |
 | **Find duplicates** | Identical files and **similar photos** (recognizes resized or edited copies). Picks what to keep for you, shows previews side by side, moves the rest to the Recycle Bin. |
 | **PC cleanup** | Temporary files, Recycle Bin, browser and app caches, thumbnails, error reports, Windows Update leftovers. Shows how much space you get back and the file list before deleting. |
+| **Uninstall programs** | Lists installed programs, runs their uninstaller and then finds the folders and registry keys they left behind (with a registry backup). |
+| **Secure delete** | Overwrites files and folders before deleting them so recovery tools can't find them, and wipes the free space of a drive. |
 | **File recovery** | *Quick, with original names*: NTFS, FAT12/16/32 and exFAT. *Deep scan*: finds files by their content, even after formatting. Read-only; works on disk images too. |
 | **System info** | Windows, CPU, RAM, graphics card, disks with S.M.A.R.T. health, battery wear and cycles, network and Wi-Fi, startup programs you can turn on and off, live CPU and memory usage. |
+
+### Network
+| Tool | What it does |
+|---|---|
+| **Send to phone** | Exchange photos and files with your phone on the same Wi-Fi: scan a QR code and download or upload from the phone's browser. No app, cable or cloud. |
+| **Network & Wi-Fi** | Internet speed test, your Wi-Fi connection and nearby networks with signal and channels (with tips), devices connected to your home network. |
 
 ### Utilities
 | Tool | What it does |
 |---|---|
 | **QR & passwords** | QR codes for links, Wi-Fi, contacts, email and SMS, as PNG or SVG. Secure password generator and strength check, all offline. |
+| **Quick tools** | Keyboard shortcuts that work in any program: copy text from anywhere on the screen (`Win+Shift+T`), color picker (`Win+Shift+C`), pixel ruler, keep a window always on top (`Win+Ctrl+T`). |
+| **Clipboard** | History of everything you copy (text, images, files) to search and paste again; `Win+Alt+V` opens a small window to paste from any program. Content marked as private by password managers is skipped. |
 | **Gemini** | Google's AI in a built-in panel that stays signed in, or in Chrome with your existing profile. |
 | **Settings** | Language, right-click menu, add-on components, data folder and error log. |
 
@@ -89,11 +105,13 @@ The **right-click menu** in File Explorer (on Windows 11 under *Show more option
 add to an archive and ask Gemini for any file; edit, compress and OCR for PDFs; edit and convert for images;
 extract here for archives; analyze space, find duplicates, rename and compress for folders.
 
+**In the background:** closing the window keeps SwinKnife in the notification area, so shortcuts and clipboard history keep working; in *Settings* you can also start it with Windows or turn this off.
+
 ## Privacy
 
 SwinKnife works offline on your PC and collects no data. It goes online only to download FFmpeg or 7-Zip
 the first time a tool needs them, and when you use Gemini, which sends your request to Google. Once a day it checks GitHub for a new version (you can turn this off in *Settings*).
-Settings and logs stay in `%LOCALAPPDATA%\SwinKnife`.
+The speed test uses Cloudflare's servers, and *Translate documents* sends the text to Google with your own API key. *Send to phone* only works inside your local network. Settings and logs stay in `%LOCALAPPDATA%\SwinKnife`.
 
 ## Languages
 

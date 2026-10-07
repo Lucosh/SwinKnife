@@ -113,7 +113,7 @@ public sealed class CleanupPage : UserControl, IToolPage
             var elevate = Ui.Btn(L.T("Riavvia come amministratore"), SymbolRegular.ShieldKeyhole24, (_, _) =>
             {
                 if (!_main.CanCloseAllPages()) return;
-                if (RawSource.RelaunchAsAdmin("--page clean --elevated")) Application.Current.Shutdown();
+                if (RawSource.RelaunchAsAdmin("--page clean --elevated")) App.Quit();
             });
             DockPanel.SetDock(elevate, Dock.Right);
             bp.Children.Add(elevate);

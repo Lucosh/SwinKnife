@@ -100,7 +100,7 @@ public partial class DiskAnalyzerPage : UserControl, IToolPage
         var arg = path == null ? "" : $" \"{(path.EndsWith('\\') ? path + "." : path)}\"";
         if (RawSource.RelaunchAsAdmin("--page disk --elevated" + arg))
         {
-            Application.Current.Shutdown();
+            App.Quit();
             return true;
         }
         Dlg.Error(L.T("Non è stato possibile ottenere i privilegi di amministratore."));

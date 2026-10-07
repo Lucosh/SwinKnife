@@ -168,7 +168,7 @@ public partial class RecoveryPage : UserControl, IToolPage
     private void Elevate_Click(object sender, RoutedEventArgs e)
     {
         if (!_main.CanCloseAllPages()) return;
-        if (RawSource.RelaunchAsAdmin("--page recovery --elevated")) Application.Current.Shutdown();
+        if (RawSource.RelaunchAsAdmin("--page recovery --elevated")) App.Quit();
         else Dlg.Error(L.T("Non è stato possibile ottenere i privilegi di amministratore."));
     }
 

@@ -58,14 +58,20 @@ FFmpeg (audio, video, registrazione dello schermo) e 7-Zip (creazione di archivi
 | Strumento | Cosa fa |
 |---|---|
 | **Apri file** | Immagini (anche HEIC, AVIF, JPEG XL, PSD, RAW, GIF animate), PDF, XPS, Word/Excel/PowerPoint/ODT, CSV e XLSX come tabella, testo e codice con evidenziazione, Markdown/HTML con anteprima, SVG, audio, video, archivi, font; tutto il resto in esadecimale. Dettagli del file, MD5/SHA-256 e **Chiedi a Gemini** (riassumi, spiega, traduci, correggi). |
+| **Cerca file** | Trova all'istante qualsiasi file o cartella su tutti i dischi mentre scrivi, come *Everything*: caratteri jolly (`*.pdf`), `ext:jpg;png`, esclusioni (`-bozza`), filtri per tipo. Da amministratore l'indice si crea in pochi secondi dalla tabella dei file di NTFS e resta aggiornato in tempo reale. |
 | **Converti** | Immagini ↔ JPG/PNG/WEBP/AVIF/JPEG XL/BMP/GIF/TIFF/ICO/PDF · Word ↔ PDF/DOCX/ODT/RTF/TXT/HTML · PDF → Word/PNG/JPG/TXT · Excel/CSV/JSON · PowerPoint → PDF/immagini · Markdown/HTML/TXT → PDF · audio e video · **OCR**: immagine → testo, PDF scansionato → PDF ricercabile. |
 | **Editor PDF** | Modifica del testo esistente, aggiunta di testo, evidenziatore, bianchetto, oscuramento, firma, disegno, note; **compilazione moduli**; **OCR**; unisci, dividi, ruota e riordina le pagine; filigrana, numeri di pagina, compressione, password AES-256; annulla/ripeti. |
+| **Traduci documenti** | Traduce interi file Word, PowerPoint, Excel, PDF, testi e sottotitoli (.srt) in 27 lingue con Google Gemini, mantenendo impaginazione, stili e immagini (serve una chiave API gratuita di Gemini). |
+| **Confronta** | Differenze riga per riga tra due file (testi, codice, Word, PDF…) e tra due cartelle, con copia e sincronizzazione in entrambe le direzioni. |
 | **Archivi** | Crea ZIP (password AES-256), 7z (contenuto e nomi cifrati) e TAR.GZ; estrae ZIP, 7z, RAR, TAR, GZ, BZ2, XZ, anche protetti da password. |
 
 ### Foto e schermo
 | Strumento | Cosa fa |
 |---|---|
 | **Editor foto** | Come l'app Foto dell'iPhone: *Regola* (15 cursori + Auto), *Filtri*, *Ritaglia*. Salva una copia e mantiene i dati EXIF. |
+| **Foto in blocco** | Ridimensiona e comprime tante foto insieme per e-mail, chat o web (JPG, WEBP, AVIF, PNG) e toglie la posizione GPS o tutti i dati nascosti. |
+| **Rimuovi sfondo** | Ritaglia in automatico persone, animali e oggetti con un modello di intelligenza artificiale che gira sul PC; sfondo trasparente, colorato o sfocato. |
+| **Editor video** | Taglia, comprimi per stare nei limiti di WhatsApp o dell'e-mail, estrai l'audio (MP3/M4A), crea GIF, togli l'audio, ruota e unisci video. |
 | **Cattura schermo** | Screenshot di un'area, una finestra o tutto lo schermo, con frecce, forme, evidenziatore, testo, passaggi numerati e pixel per nascondere i dati sensibili. Registrazione dello schermo in **MP4** (con microfono) o **GIF**. |
 | **Rinomina in blocco** | Modelli con `{nome}`, `{num}`, `{data}` (data di scatto della foto), `{ora}`, `{cartella}`; cerca e sostituisci (anche regex), maiuscole/minuscole, estensioni, accenti. Anteprima, conflitti segnalati, annulla. |
 
@@ -75,13 +81,23 @@ FFmpeg (audio, video, registrazione dello schermo) e 7-Zip (creazione di archivi
 | **Analisi disco** | Come WinDirStat: cartelle per dimensione, statistiche per tipo di file e mappa a riquadri. Salta i file di OneDrive solo nel cloud. Da amministratore usa la **modalità veloce**: legge direttamente la tabella dei file di NTFS, come WinDirStat e WizTree, e analizza un disco intero in pochi secondi. |
 | **Trova duplicati** | File identici e **foto simili** (riconosce le copie ridimensionate o ritoccate). Sceglie per te cosa tenere, mostra le anteprime affiancate e sposta il resto nel Cestino. |
 | **Pulizia PC** | File temporanei, Cestino, cache di browser e app, miniature, rapporti errori, residui di Windows Update. Mostra quanto spazio recuperi e l'elenco dei file prima di eliminarli. |
+| **Disinstalla programmi** | Elenca i programmi installati, avvia il loro disinstallatore e poi trova le cartelle e le chiavi di registro rimaste (con copia di sicurezza del registro). |
+| **Eliminazione sicura** | Sovrascrive file e cartelle prima di eliminarli, così i programmi di recupero non li ritrovano, e pulisce lo spazio libero di un disco. |
 | **Recupero file** | *Rapido, con i nomi originali*: NTFS, FAT12/16/32 ed exFAT. *Scansione profonda*: trova i file dal contenuto, anche dopo una formattazione. Solo lettura; funziona anche sulle immagini disco. |
 | **Info sistema** | Windows, CPU, RAM, scheda video, dischi con stato S.M.A.R.T., usura e cicli della batteria, rete e Wi-Fi, programmi all'avvio da attivare o disattivare, uso di CPU e memoria in tempo reale. |
+
+### Rete
+| Strumento | Cosa fa |
+|---|---|
+| **Invia al telefono** | Scambia foto e file con il telefono sulla stessa rete Wi-Fi: inquadri un QR code e scarichi o invii dal browser del telefono. Nessuna app, cavo o cloud. |
+| **Rete e Wi-Fi** | Test di velocità di Internet, la tua connessione Wi-Fi e le reti vicine con segnale e canali (con consigli), dispositivi collegati alla rete di casa. |
 
 ### Utilità
 | Strumento | Cosa fa |
 |---|---|
 | **QR e password** | Codici QR per link, Wi-Fi, contatti, e-mail e SMS, in PNG o SVG. Generatore di password sicure e verifica della robustezza, tutto offline. |
+| **Strumenti rapidi** | Scorciatoie che funzionano in qualsiasi programma: copia il testo da qualunque punto dello schermo (`Win+Shift+T`), contagocce (`Win+Shift+C`), righello in pixel, finestra sempre in primo piano (`Win+Ctrl+T`). |
+| **Appunti** | Cronologia di tutto quello che copi (testi, immagini, file) da cercare e incollare di nuovo; `Win+Alt+V` apre una finestrella per incollare in qualsiasi programma. I contenuti che i password manager segnano come privati non vengono salvati. |
 | **Gemini** | L'IA di Google in un pannello integrato che resta collegato, oppure in Chrome con il tuo profilo. |
 | **Impostazioni** | Lingua, menu del tasto destro, componenti aggiuntivi, cartella dei dati e registro errori. |
 
@@ -89,11 +105,13 @@ Il **menu del tasto destro** di Esplora file (su Windows 11 in *Mostra altre opz
 aggiungi a un archivio e chiedi a Gemini per qualsiasi file; modifica, comprimi e OCR per i PDF; modifica e converti per le immagini;
 estrai qui per gli archivi; analizza spazio, cerca duplicati, rinomina e comprimi per le cartelle.
 
+**In background:** chiudendo la finestra SwinKnife resta nell'area di notifica, così scorciatoie e cronologia degli appunti continuano a funzionare; nelle *Impostazioni* puoi anche avviarlo con Windows o disattivare questa funzione.
+
 ## Privacy
 
 SwinKnife lavora offline sul tuo PC e non raccoglie dati. Si collega a Internet solo per scaricare FFmpeg o 7-Zip
 la prima volta che uno strumento ne ha bisogno, e quando usi Gemini, che invia la tua richiesta a Google. Una volta al giorno controlla su GitHub se c'è una nuova versione (si può disattivare nelle *Impostazioni*).
-Impostazioni e log restano in `%LOCALAPPDATA%\SwinKnife`.
+Il test di velocità usa i server di Cloudflare e *Traduci documenti* invia il testo a Google con la tua chiave API. *Invia al telefono* funziona solo dentro la tua rete locale. Impostazioni e log restano in `%LOCALAPPDATA%\SwinKnife`.
 
 ## Lingue
 

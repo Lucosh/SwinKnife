@@ -77,6 +77,35 @@ public static partial class Ffmpeg
                double.Parse(m.Groups[3].Value, CultureInfo.InvariantCulture);
     }
 
+    [GeneratedRegex(@"Video: .*?, (\d{2,5})x(\d{2,5})")]
+    private static partial Regex SizeRegex();
+
+    /// <summary>Durata, risoluzione e presenza dell'audio di un file multimediale.</summary>
+    public static (double duration, int width, int height, bool audio) Probe(string exe, string src)
+    {
+        var psi = new ProcessStartInfo(exe) { RedirectStandardError = true, CreateNoWindow = true, UseShellExecute = false, StandardErrorEncoding = Encoding.UTF8 };
+        psi.ArgumentList.Add("-hide_banner");
+        psi.ArgumentList.Add("-i");
+        psi.ArgumentList.Add(src);
+        using var p = Process.Start(psi)!;
+        var err = p.StandardError.ReadToEnd();
+        p.WaitForExit();
+        double d = 0;
+        var m = DurationRegex().Match(err);
+        if (m.Success)
+            d = int.Parse(m.Groups[1].Value) * 3600 + int.Parse(m.Groups[2].Value) * 60 + double.Parse(m.Groups[3].Value, CultureInfo.InvariantCulture);
+        var sz = SizeRegex().Match(err);
+        return (d, sz.Success ? int.Parse(sz.Groups[1].Value) : 0, sz.Success ? int.Parse(sz.Groups[2].Value) : 0, err.Contains("Audio:"));
+    }
+
+    /// <summary>Trova FFmpeg o lo scarica (chiedendo conferma all'utente tramite la funzione passata).</summary>
+    public static async Task<string?> EnsureAsync(Func<bool> confirm, IProgress<(double, string)>? progress, CancellationToken ct)
+    {
+        if (Find() is { } exe) return exe;
+        if (!confirm()) return null;
+        return await DownloadAsync(progress, ct);
+    }
+
     public static void Run(string exe, IEnumerable<string> args, double duration, Action<double> progress, CancellationToken ct)
     {
         var psi = new ProcessStartInfo(exe)

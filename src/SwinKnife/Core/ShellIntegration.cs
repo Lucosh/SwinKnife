@@ -31,6 +31,8 @@ public static class ShellIntegration
             new("b_convert", L.T("Converti…"), "--page convert"),
             new("c_archive", L.T("Aggiungi a un archivio…"), "--page archive"),
             new("d_gemini", L.T("Chiedi a Gemini di riassumerlo"), "--action gemini"),
+            new("e_phone", L.T("Invia al telefono"), "--page phone"),
+            new("f_shred", L.T("Elimina in modo sicuro…"), "--page shred"),
         ]),
         new(@"SystemFileAssociations\.pdf\shell", "SwinKnifePdf", L.T("SwinKnife: PDF"),
         [
@@ -42,6 +44,13 @@ public static class ShellIntegration
         [
             new("a_edit", L.T("Modifica foto"), "--page photo"),
             new("b_convert", L.T("Converti immagine…"), "--page convert"),
+            new("c_bg", L.T("Rimuovi sfondo"), "--page bgremove"),
+            new("d_batch", L.T("Riduci per e-mail e chat"), "--page batch"),
+        ]),
+        new(@"SystemFileAssociations\video\shell", "SwinKnifeVideo", L.T("SwinKnife: video"),
+        [
+            new("a_edit", L.T("Modifica video"), "--page video"),
+            new("b_convert", L.T("Converti…"), "--page convert"),
         ]),
         new(@"Directory\shell", "SwinKnife", "SwinKnife",
         [
@@ -49,6 +58,7 @@ public static class ShellIntegration
             new("b_dupes", L.T("Cerca duplicati"), "--page dupes"),
             new("c_rename", L.T("Rinomina i file"), "--page rename"),
             new("d_archive", L.T("Comprimi in un archivio…"), "--page archive"),
+            new("e_shred", L.T("Elimina in modo sicuro…"), "--page shred"),
         ]),
         new(@"Directory\Background\shell", "SwinKnife", "SwinKnife",
         [
@@ -112,7 +122,7 @@ public static class ShellIntegration
             if (!IsInstalled()) return;
             using var k = Registry.CurrentUser.OpenSubKey($@"{Root}\*\shell\SwinKnife\shell\a_open\command");
             // riscrivo anche se mancano voci aggiunte in una versione successiva
-            using var newest = Registry.CurrentUser.OpenSubKey($@"{Root}\SystemFileAssociations\.zip\shell\SwinKnifeArchive");
+            using var newest = Registry.CurrentUser.OpenSubKey($@"{Root}\SystemFileAssociations\video\shell\SwinKnifeVideo");
             using var root = Registry.CurrentUser.OpenSubKey($@"{Root}\*\shell\SwinKnife");
             var langChanged = root?.GetValue("Lang") as string != L.Code;
             if (k?.GetValue("") is string cmd && !cmd.Contains(Exe, StringComparison.OrdinalIgnoreCase) || newest == null || langChanged) Install();

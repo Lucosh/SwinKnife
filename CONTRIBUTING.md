@@ -27,13 +27,15 @@ Useful command-line options of `SwinKnife.exe`:
 | Option | Effect |
 |---|---|
 | `"<file>"` | opens the file in the right tool |
-| `--page <tool>` | opens a tool (`viewer`, `convert`, `pdf`, `archive`, `photo`, `capture`, `rename`, `disk`, `dupes`, `clean`, `recovery`, `sysinfo`, `qr`, `gemini`, `settings`) |
+| `--page <tool>` | opens a tool: `viewer`, `search`, `convert`, `pdf`, `translate`, `compare`, `archive`, `photo`, `batch`, `bgremove`, `video`, `capture`, `rename`, `disk`, `dupes`, `clean`, `uninstall`, `shred`, `recovery`, `sysinfo`, `phone`, `network`, `quick`, `clipboard`, `qr`, `gemini`, `settings` |
 | `--action compress-pdf\|ocr-pdf\|gemini\|extract-here "<file>"` | runs an action directly (used by the right-click menu) |
+| `--tray` | starts hidden in the notification area (used by "Start with Windows") |
 | `--register-shell` / `--unregister-shell` | adds or removes the right-click menu without opening the window (used by the installer) |
 
 The app runs as a single instance: a second launch passes its arguments to the window that is already open.
 
 Environment variables for testing: `SWINKNIFE_LANG=de` forces a language without touching the settings;
+`SWINKNIFE_UI_TEST=1` skips the normal startup (single instance, tray, shortcuts) so automated UI tests can create the window themselves;
 `SWINKNIFE_MISSING=1` writes the texts shown without a translation to `%LOCALAPPDATA%\SwinKnife\missing-<language>.txt` on exit.
 
 ## Code structure

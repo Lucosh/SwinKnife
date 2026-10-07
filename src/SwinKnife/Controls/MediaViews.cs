@@ -90,12 +90,28 @@ public sealed class MediaView : DockPanel
         };
     }
 
-    public void Load(string path)
+    public void Load(string path, bool autoplay = true)
     {
         _media.Source = new Uri(path);
         _media.Play();
-        SetPlaying(true);
+        if (!autoplay) _media.Pause(); // Play+Pause mostra il primo fotogramma
+        SetPlaying(autoplay);
         _timer.Start();
+    }
+
+    /// <summary>Posizione attuale in secondi.</summary>
+    public double Position => _media.Position.TotalSeconds;
+
+    public void Seek(double seconds)
+    {
+        _media.Position = TimeSpan.FromSeconds(Math.Max(0, seconds));
+        _pos.Value = seconds;
+    }
+
+    public void Pause()
+    {
+        _media.Pause();
+        SetPlaying(false);
     }
 
     public void Stop()

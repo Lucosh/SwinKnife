@@ -135,6 +135,7 @@ public partial class MainWindow : FluentWindow
         var action = Take("--action");
         list.Remove("--elevated");
         list.Remove("--restart");
+        list.Remove("--tray");
         var files = list.Where(a => File.Exists(a) || Directory.Exists(a)).Select(Path.GetFullPath).ToList();
         if (action != null)
         {
@@ -196,8 +197,24 @@ public partial class MainWindow : FluentWindow
         return true;
     }
 
+    private static bool _trayHintShown;
+
     protected override void OnClosing(CancelEventArgs e)
     {
+        // con l'icona nell'area di notifica la X nasconde soltanto la finestra (scorciatoie e appunti restano attivi)
+        if (Resident.TrayEnabled && Resident.HasTrayIcon && !App.Exiting)
+        {
+            e.Cancel = true;
+            SavePlacement();
+            Hide();
+            if (!_trayHintShown && Settings.Get("tray.hint") == null)
+            {
+                _trayHintShown = true;
+                Settings.Set("tray.hint", "1");
+                Resident.Balloon(AppInfo.Name, L.T("SwinKnife resta attivo qui: le scorciatoie e la cronologia degli appunti continuano a funzionare. Clic destro sull'icona per uscire."));
+            }
+            return;
+        }
         if (!_closeConfirmed && !CanCloseAllPages())
         {
             e.Cancel = true;

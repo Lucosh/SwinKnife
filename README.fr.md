@@ -58,14 +58,20 @@ FFmpeg (audio, vidéo, enregistrement de l'écran) et 7-Zip (création d'archive
 | Outil | Ce qu'il fait |
 |---|---|
 | **Ouvrir un fichier** | Images (aussi HEIC, AVIF, JPEG XL, PSD, RAW, GIF animés), PDF, XPS, Word/Excel/PowerPoint/ODT, CSV et XLSX en tableau, texte et code avec coloration syntaxique, Markdown/HTML avec aperçu, SVG, audio, vidéo, archives, polices ; tout le reste en hexadécimal. Détails du fichier, MD5/SHA-256 et **Interroger Gemini** (résumer, expliquer, traduire, corriger). |
+| **Rechercher des fichiers** | Trouve instantanément n'importe quel fichier ou dossier sur tous les disques pendant la frappe, comme *Everything* : jokers (`*.pdf`), `ext:jpg;png`, exclusions (`-brouillon`), filtres par type. En administrateur, l'index se crée en quelques secondes depuis la table des fichiers NTFS et reste à jour en temps réel. |
 | **Convertir** | Images ↔ JPG/PNG/WEBP/AVIF/JPEG XL/BMP/GIF/TIFF/ICO/PDF · Word ↔ PDF/DOCX/ODT/RTF/TXT/HTML · PDF → Word/PNG/JPG/TXT · Excel/CSV/JSON · PowerPoint → PDF/images · Markdown/HTML/TXT → PDF · audio et vidéo · **OCR** : image → texte, PDF numérisé → PDF interrogeable. |
 | **Éditeur PDF** | Modifier le texte existant, ajouter du texte, surligneur, correcteur, caviardage, signature, dessin, notes ; **remplissage de formulaires** ; **OCR** ; fusionner, diviser, faire pivoter et réorganiser les pages ; filigrane, numéros de page, compression, mot de passe AES-256 ; annuler/rétablir. |
+| **Traduire des documents** | Traduit des fichiers Word, PowerPoint, Excel, PDF, textes et sous-titres (.srt) entiers dans 27 langues avec Google Gemini, en conservant la mise en page, les styles et les images (clé API Gemini gratuite nécessaire). |
+| **Comparer** | Différences ligne par ligne entre deux fichiers (textes, code, Word, PDF…) et entre deux dossiers, avec copie et synchronisation dans les deux sens. |
 | **Archives** | Crée des ZIP (mot de passe AES-256), 7z (contenu et noms chiffrés) et TAR.GZ ; extrait ZIP, 7z, RAR, TAR, GZ, BZ2, XZ, même protégés par mot de passe. |
 
 ### Photos et écran
 | Outil | Ce qu'il fait |
 |---|---|
 | **Éditeur de photos** | Comme l'app Photos de l'iPhone : *Régler* (15 curseurs + Auto), *Filtres*, *Recadrer*. Enregistre une copie et conserve les données EXIF. |
+| **Photos par lot** | Redimensionne et compresse de nombreuses photos à la fois pour l'e-mail, la messagerie ou le web (JPG, WEBP, AVIF, PNG) et supprime la position GPS ou toutes les données cachées. |
+| **Supprimer l'arrière-plan** | Détoure automatiquement personnes, animaux et objets avec un modèle d'intelligence artificielle qui tourne sur le PC ; fond transparent, uni ou flou. |
+| **Éditeur vidéo** | Couper, compresser pour respecter les limites de WhatsApp ou de l'e-mail, extraire l'audio (MP3/M4A), créer des GIF, supprimer l'audio, faire pivoter et assembler des vidéos. |
 | **Capture d'écran** | Captures d'une zone, d'une fenêtre ou de tout l'écran, avec flèches, formes, surligneur, texte, étapes numérotées et pixellisation des données sensibles. Enregistrement de l'écran en **MP4** (avec micro) ou en **GIF**. |
 | **Renommage en masse** | Modèles avec `{nom}`, `{num}`, `{date}` (date de prise de vue), `{heure}`, `{dossier}` ; rechercher et remplacer (regex aussi), casse, extensions, accents. Aperçu, conflits signalés, annulation. |
 
@@ -75,13 +81,23 @@ FFmpeg (audio, vidéo, enregistrement de l'écran) et 7-Zip (création d'archive
 | **Analyse du disque** | Comme WinDirStat : dossiers par taille, statistiques par type de fichier et carte proportionnelle. Ignore les fichiers OneDrive uniquement dans le cloud. En administrateur, **mode rapide** : lit directement la table des fichiers NTFS, comme WinDirStat et WizTree, et analyse un disque entier en quelques secondes. |
 | **Trouver les doublons** | Fichiers identiques et **photos similaires** (reconnaît les copies redimensionnées ou retouchées). Choisit pour vous ce qu'il faut garder, affiche les aperçus côte à côte et déplace le reste vers la Corbeille. |
 | **Nettoyage du PC** | Fichiers temporaires, Corbeille, caches des navigateurs et des applications, miniatures, rapports d'erreurs, restes de Windows Update. Indique l'espace récupéré et la liste des fichiers avant suppression. |
+| **Désinstaller des programmes** | Liste les programmes installés, lance leur désinstallation puis trouve les dossiers et clés de registre restants (avec sauvegarde du registre). |
+| **Suppression sécurisée** | Écrase fichiers et dossiers avant de les supprimer pour que les outils de récupération ne les retrouvent pas, et nettoie l'espace libre d'un disque. |
 | **Récupération de fichiers** | *Rapide, avec les noms d'origine* : NTFS, FAT12/16/32 et exFAT. *Analyse approfondie* : retrouve les fichiers d'après leur contenu, même après un formatage. Lecture seule ; fonctionne aussi sur des images disque. |
 | **Infos système** | Windows, CPU, RAM, carte graphique, disques avec état S.M.A.R.T., usure et cycles de la batterie, réseau et Wi-Fi, programmes au démarrage à activer ou désactiver, utilisation du CPU et de la mémoire en temps réel. |
+
+### Réseau
+| Outil | Ce qu'il fait |
+|---|---|
+| **Envoyer au téléphone** | Échangez photos et fichiers avec votre téléphone sur le même Wi-Fi : scannez un QR code et téléchargez ou envoyez depuis le navigateur du téléphone. Sans application, câble ni cloud. |
+| **Réseau et Wi-Fi** | Test de vitesse Internet, votre connexion Wi-Fi et les réseaux voisins avec signal et canaux (avec conseils), appareils connectés au réseau domestique. |
 
 ### Utilitaires
 | Outil | Ce qu'il fait |
 |---|---|
 | **QR et mots de passe** | QR codes pour liens, Wi-Fi, contacts, e-mail et SMS, en PNG ou SVG. Générateur de mots de passe sûrs et vérification de leur robustesse, entièrement hors ligne. |
+| **Outils rapides** | Raccourcis qui fonctionnent dans n'importe quel programme : copier le texte de n'importe quel endroit de l'écran (`Win+Shift+T`), pipette (`Win+Shift+C`), règle en pixels, fenêtre toujours au premier plan (`Win+Ctrl+T`). |
+| **Presse-papiers** | Historique de tout ce que vous copiez (textes, images, fichiers) à retrouver et coller à nouveau ; `Win+Alt+V` ouvre une petite fenêtre pour coller dans n'importe quel programme. Les contenus marqués comme privés par les gestionnaires de mots de passe sont ignorés. |
 | **Gemini** | L'IA de Google dans un panneau intégré qui reste connecté, ou dans Chrome avec votre profil. |
 | **Paramètres** | Langue, menu contextuel, composants supplémentaires, dossier de données et journal des erreurs. |
 
@@ -89,11 +105,13 @@ Le **menu contextuel** de l'Explorateur (sous Windows 11 dans *Afficher d'autres
 ajouter à une archive et interroger Gemini pour tout fichier ; modifier, compresser et OCR pour les PDF ; modifier et convertir pour les images ;
 extraire ici pour les archives ; analyser l'espace, rechercher les doublons, renommer et compresser pour les dossiers.
 
+**En arrière-plan :** en fermant la fenêtre, SwinKnife reste dans la zone de notification, ainsi les raccourcis et l'historique du presse-papiers continuent de fonctionner ; dans les *Paramètres* vous pouvez aussi le lancer avec Windows ou désactiver cette fonction.
+
 ## Confidentialité
 
 SwinKnife fonctionne hors ligne sur votre PC et ne collecte aucune donnée. Il ne se connecte à Internet que pour télécharger FFmpeg ou 7-Zip
 la première fois qu'un outil en a besoin, et lorsque vous utilisez Gemini, qui envoie votre demande à Google. Une fois par jour, il vérifie sur GitHub s'il existe une nouvelle version (désactivable dans les *Paramètres*).
-Les paramètres et les journaux restent dans `%LOCALAPPDATA%\SwinKnife`.
+Le test de vitesse utilise les serveurs de Cloudflare, et *Traduire des documents* envoie le texte à Google avec votre propre clé API. *Envoyer au téléphone* ne fonctionne que dans votre réseau local. Les paramètres et les journaux restent dans `%LOCALAPPDATA%\SwinKnife`.
 
 ## Langues
 

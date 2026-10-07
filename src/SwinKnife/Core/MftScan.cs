@@ -43,7 +43,7 @@ public static unsafe class MftScan
     private static ulong U64(ReadOnlySpan<byte> b, int o) => BinaryPrimitives.ReadUInt64LittleEndian(b[o..]);
 
     /// <summary>Dati di un record della MFT che servono per l'albero.</summary>
-    private sealed class Table(int n)
+    internal sealed class Table(int n)
     {
         public readonly byte[] Flags = new byte[n];        // 1 = in uso, 2 = cartella
         public readonly ushort[] Seq = new ushort[n];
@@ -61,7 +61,16 @@ public static unsafe class MftScan
     {
         var full = Path.GetFullPath(path);
         var volume = Path.GetPathRoot(full)!;
-        using var h = CreateFile($@"\\.\{volume[..2]}", 0x80000000, 3, IntPtr.Zero, 3, 0, IntPtr.Zero);
+        var (h, bulk) = Open(volume);
+        using (h)
+        using (bulk)
+            return ScanHandle(h, bulk, full, volume, skipCloud, progress, ct);
+    }
+
+    /// <summary>Apre il volume due volte: con cache (letture sparse) e senza (lettura in blocco della MFT).</summary>
+    internal static (SafeFileHandle h, SafeFileHandle bulk) Open(string volume)
+    {
+        var h = CreateFile($@"\\.\{volume[..2]}", 0x80000000, 3, IntPtr.Zero, 3, 0, IntPtr.Zero);
         if (h.IsInvalid)
         {
             var err = Marshal.GetLastWin32Error();
@@ -69,12 +78,25 @@ public static unsafe class MftScan
                            : new IOException(L.T($"Impossibile aprire l'unità {volume[..2]} (errore {err})."));
         }
         // per la lettura in blocco: senza cache di sistema (FILE_FLAG_NO_BUFFERING), più veloce e non svuota la cache
-        using var bulk = CreateFile($@"\\.\{volume[..2]}", 0x80000000, 3, IntPtr.Zero, 3, 0x20000000, IntPtr.Zero);
-        return ScanHandle(h, bulk.IsInvalid ? h : bulk, full, volume, skipCloud, progress, ct);
+        var bulk = CreateFile($@"\\.\{volume[..2]}", 0x80000000, 3, IntPtr.Zero, 3, 0x20000000, IntPtr.Zero);
+        if (bulk.IsInvalid)
+        {
+            bulk.Dispose();
+            bulk = CreateFile($@"\\.\{volume[..2]}", 0x80000000, 3, IntPtr.Zero, 3, 0, IntPtr.Zero);
+        }
+        return (h, bulk);
     }
 
     /// <summary>Analizza un volume già aperto (o un'immagine disco NTFS); <paramref name="volume"/> è la radice da mostrare, es. "C:\".</summary>
     private static ScanResult ScanHandle(SafeFileHandle h, SafeFileHandle bulk, string full, string volume, bool skipCloud, Action<string> progress, CancellationToken ct)
+    {
+        var t = ReadTable(h, bulk, progress, ct);
+        progress(L.T("Costruzione dell'albero…"));
+        return Build(t, full, volume, skipCloud, ct);
+    }
+
+    /// <summary>Legge tutta la MFT: per ogni record nome, cartella padre, dimensione e data.</summary>
+    internal static Table ReadTable(SafeFileHandle h, SafeFileHandle bulk, Action<string> progress, CancellationToken ct)
     {
         var boot = ReadAt(h, 0, 512);
         if (Encoding.ASCII.GetString(boot, 3, 8) != "NTFS    ") throw new InvalidDataException(L.T("Il volume non è NTFS."));
@@ -136,8 +158,7 @@ public static unsafe class MftScan
                 }
         });
 
-        progress(L.T("Costruzione dell'albero…"));
-        return Build(t, full, volume, skipCloud, ct);
+        return t;
     }
 
     private static int Align(int n, int to) => (n + to - 1) / to * to;

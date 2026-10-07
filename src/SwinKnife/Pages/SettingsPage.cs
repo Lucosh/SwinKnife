@@ -56,6 +56,22 @@ public sealed class SettingsPage : UserControl, IToolPage
                 Ui.Btn(L.T("Controlla ora"), SymbolRegular.ArrowSync24, async (_, _) => await UpdateUi.CheckAsync(manual: true)),
                 Ui.Btn(L.T("Novità"), SymbolRegular.Open24, (_, _) => Util.OpenExternal($"https://github.com/{Updater.Repo}/releases"))));
 
+        // ---- in background
+        var tray = new ToggleSwitch { Content = L.T("Resta nell'area di notifica quando chiudi la finestra"), IsChecked = Resident.TrayEnabled, Margin = new Thickness(0, 0, 0, 8) };
+        tray.Click += (_, _) => Resident.TrayEnabled = tray.IsChecked == true;
+        var startup = new ToggleSwitch { Content = L.T("Avvia con Windows (ridotto a icona)"), IsChecked = Resident.StartWithWindows };
+        startup.Click += (_, _) =>
+        {
+            try { Resident.StartWithWindows = startup.IsChecked == true; }
+            catch (Exception ex) { Dlg.Error(ex.Message); startup.IsChecked = Resident.StartWithWindows; }
+        };
+        var trayPanel = new StackPanel();
+        trayPanel.Children.Add(tray);
+        trayPanel.Children.Add(startup);
+        var backgroundCard = Ui.Card(L.T("In background"),
+            L.T("Le scorciatoie degli Strumenti rapidi e la cronologia degli appunti funzionano solo mentre SwinKnife è aperto: così resta disponibile anche a finestra chiusa, con un'icona vicino all'orologio."),
+            trayPanel);
+
         var menuCard = Ui.Card(L.T("Menu del tasto destro in Esplora risorse"),
             L.T("Su file e cartelle compare la voce SwinKnife: apri, converti, comprimi, OCR, modifica PDF e foto, analizza spazio, cerca duplicati, rinomina. In Windows 11 la trovi in “Mostra altre opzioni” (o premendo Maiusc+F10)."), _menu);
 
@@ -84,6 +100,7 @@ public sealed class SettingsPage : UserControl, IToolPage
             Ui.Header(L.T("Impostazioni"), L.T("Integrazione con Windows e componenti aggiuntivi.")),
             languageCard,
             updateCard,
+            backgroundCard,
             menuCard,
             Ui.Card(L.T("Componenti"), L.T("Strumenti esterni usati da alcune funzioni."), _components),
             dataCard, about);
@@ -96,7 +113,7 @@ public sealed class SettingsPage : UserControl, IToolPage
         try
         {
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(Environment.ProcessPath!, "--restart --page settings") { UseShellExecute = false });
-            Application.Current.Shutdown();
+            App.Quit();
         }
         catch (Exception ex)
         {

@@ -65,7 +65,7 @@ public static class UpdateUi
             try
             {
                 Updater.RunInstaller(setup);
-                Application.Current.Shutdown();
+                App.Quit();
             }
             catch (Exception ex) // es. l'utente ha rifiutato la richiesta UAC di un'installazione "per tutti gli utenti"
             {

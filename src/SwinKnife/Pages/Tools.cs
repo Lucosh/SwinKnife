@@ -126,6 +126,9 @@ public static class Tools
         new("metadata", L.T("Pulizia metadati"), SymbolRegular.DocumentDismiss24, L.T("Sicurezza e privacy"),
             L.T("Togli dati nascosti (GPS, autore, revisioni) da foto, PDF, documenti Office, audio e video."),
             w => new MetadataPage(w)),
+        new("scanner", L.T("Antivirus"), SymbolRegular.ShieldCheckmark24, L.T("Sicurezza e privacy"),
+            L.T("Controlla processi, file e avvii con Windows Defender, VirusTotal ed euristiche; termina, quarantena ed elimina su tuo comando."),
+            w => new ScannerPage(w)),
 
         new("phone", L.T("Invia al telefono"), SymbolRegular.Phone24, L.T("Rete"),
             L.T("Scambia foto e file con il telefono sulla stessa rete Wi-Fi: inquadri un QR code e basta."),

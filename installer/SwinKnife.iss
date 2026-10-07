@@ -38,7 +38,8 @@ UninstallDisplayName={#AppName}
 WizardStyle=modern
 Compression=lzma2/ultra64
 SolidCompression=yes
-LZMANumBlockThreads=4
+; compressione in un processo separato a 64 bit: con Inno Setup 6 (32 bit) i ~200 MB dell'app esaurirebbero la memoria
+LZMAUseSeparateProcess=x64
 CloseApplications=force
 RestartApplications=no
 ShowLanguageDialog=auto

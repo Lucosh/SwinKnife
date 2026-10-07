@@ -32,7 +32,7 @@
 > Klicke auf **Weitere Informationen → Trotzdem ausführen**. Den Download kannst du mit `SHA256SUMS.txt` aus der Release prüfen.
 
 - **Portable Version:** `SwinKnife-<Version>-portable.zip` herunterladen, irgendwo entpacken und `SwinKnife.exe` starten.
-- **Aktualisieren:** das neue Setup herunterladen und über die alte Version installieren; die Einstellungen bleiben erhalten.
+- **Updates:** SwinKnife sucht selbst nach neuen Versionen und aktualisiert sich mit einem Klick (auch über die *Einstellungen*). Die Einstellungen bleiben erhalten.
 - **Deinstallieren:** *Einstellungen → Apps → Installierte Apps → SwinKnife*.
 
 **Voraussetzungen:** Windows 10 (Version 1809 oder neuer) oder Windows 11, 64 Bit. Alles andere ist enthalten, auch .NET.
@@ -92,7 +92,7 @@ hier entpacken für Archive; Speicher analysieren, Duplikate suchen, umbenennen 
 ## Datenschutz
 
 SwinKnife arbeitet offline auf deinem PC und sammelt keine Daten. Es geht nur online, um FFmpeg oder 7-Zip herunterzuladen,
-wenn ein Werkzeug sie zum ersten Mal braucht, und wenn du Gemini verwendest, das deine Anfrage an Google sendet.
+wenn ein Werkzeug sie zum ersten Mal braucht, und wenn du Gemini verwendest, das deine Anfrage an Google sendet. Einmal täglich prüft es auf GitHub, ob es eine neue Version gibt (abschaltbar in den *Einstellungen*).
 Einstellungen und Protokolle bleiben in `%LOCALAPPDATA%\SwinKnife`.
 
 ## Sprachen

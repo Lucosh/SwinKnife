@@ -106,5 +106,10 @@ Technical names that must not change (Windows commands, PDF names, file formats)
 You can also start the *Release* workflow by hand from the **Actions** tab: it builds the same files as a downloadable artifact without publishing anything.
 To build the same files locally, run `tools\release\build.ps1`; they end up in `%LOCALAPPDATA%\SwinKnife\release`.
 
+**Automatic updates.** Once a day the app asks the GitHub API for the latest release (`Core/Updater.cs`). If it is newer,
+it downloads `SwinKnife-Setup-<version>.exe`, checks it against `SHA256SUMS.txt` and runs it with `/SILENT /RELAUNCH=1`:
+the installer closes SwinKnife, updates it and starts it again. So every release must keep these two file names, and the tag
+must be a plain version (`v1.2.3`). Copies not installed with the setup (portable zip, `build.bat`) only get a link to the download page.
+
 The installer installs per user in `%LOCALAPPDATA%\Programs\SwinKnife` (no admin rights), or for all users if chosen in the setup.
 Keep the `AppId` in `installer/SwinKnife.iss` unchanged, otherwise updates are no longer recognized.

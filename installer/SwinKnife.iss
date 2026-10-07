@@ -77,11 +77,18 @@ Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; Tasks: desktopico
 [Run]
 Filename: "{app}\{#AppExe}"; Parameters: "--register-shell"; Tasks: shellmenu; Flags: runhidden waituntilterminated
 Filename: "{app}\{#AppExe}"; Description: "{cm:LaunchProgram,{#AppName}}"; Flags: nowait postinstall skipifsilent
+; aggiornamento automatico (installer avviato dall'app con /SILENT /RELAUNCH=1): riapre SwinKnife a fine installazione
+Filename: "{app}\{#AppExe}"; Flags: nowait runasoriginaluser; Check: Relaunch
 
 [UninstallRun]
 Filename: "{app}\{#AppExe}"; Parameters: "--unregister-shell"; Flags: runhidden waituntilterminated; RunOnceId: "UnregisterShell"
 
 [Code]
+function Relaunch: Boolean;
+begin
+  Result := ExpandConstant('{param:RELAUNCH|0}') = '1';
+end;
+
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 var
   Data: String;

@@ -47,6 +47,15 @@ public sealed class SettingsPage : UserControl, IToolPage
         };
         var languageCard = Ui.Card(L.T("Lingua"), L.T("La lingua dell'interfaccia. Le traduzioni si possono migliorare su GitHub."), language);
 
+        // ---- aggiornamenti
+        var auto = new ToggleSwitch { Content = L.T("Controlla automaticamente all'avvio (una volta al giorno)"), IsChecked = Updater.AutoCheck, Margin = new Thickness(0, 0, 20, 0) };
+        auto.Click += (_, _) => Updater.AutoCheck = auto.IsChecked == true;
+        var updateCard = Ui.Card(L.T("Aggiornamenti"),
+            L.T($"Versione installata: {AppInfo.Version}. Le nuove versioni arrivano da GitHub: SwinKnife le scarica, ne verifica l'integrità e si aggiorna da solo."),
+            Ui.Row(auto,
+                Ui.Btn(L.T("Controlla ora"), SymbolRegular.ArrowSync24, async (_, _) => await UpdateUi.CheckAsync(manual: true)),
+                Ui.Btn(L.T("Novità"), SymbolRegular.Open24, (_, _) => Util.OpenExternal($"https://github.com/{Updater.Repo}/releases"))));
+
         var menuCard = Ui.Card(L.T("Menu del tasto destro in Esplora risorse"),
             L.T("Su file e cartelle compare la voce SwinKnife: apri, converti, comprimi, OCR, modifica PDF e foto, analizza spazio, cerca duplicati, rinomina. In Windows 11 la trovi in “Mostra altre opzioni” (o premendo Maiusc+F10)."), _menu);
 
@@ -74,6 +83,7 @@ public sealed class SettingsPage : UserControl, IToolPage
         Content = Ui.ScrollPage(
             Ui.Header(L.T("Impostazioni"), L.T("Integrazione con Windows e componenti aggiuntivi.")),
             languageCard,
+            updateCard,
             menuCard,
             Ui.Card(L.T("Componenti"), L.T("Strumenti esterni usati da alcune funzioni."), _components),
             dataCard, about);

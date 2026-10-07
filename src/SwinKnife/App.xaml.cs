@@ -67,6 +67,12 @@ public partial class App : Application
             window.HandleArgs(args);
         }));
         ShellIntegration.RefreshIfInstalled();
+        if (Updater.DueForCheck())
+            Dispatcher.InvokeAsync(async () =>
+            {
+                await Task.Delay(TimeSpan.FromSeconds(5)); // non rallento l'avvio
+                await UpdateUi.CheckAsync(manual: false);
+            });
     }
 
     protected override void OnExit(ExitEventArgs e)

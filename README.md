@@ -85,16 +85,20 @@ FFmpeg (audio, video, screen recording) and 7-Zip (creating .7z archives) are do
 | **Secure delete** | Overwrites files and folders before deleting them so recovery tools can't find them, and wipes the free space of a drive. |
 | **File recovery** | *Quick, with original names*: NTFS, FAT12/16/32 and exFAT. *Deep scan*: finds files by their content, even after formatting. Read-only; works on disk images too. |
 | **System info** | Windows, CPU, RAM, graphics card, disks with S.M.A.R.T. health, battery wear and cycles, network and Wi-Fi, startup programs you can turn on and off, live CPU and memory usage. |
+| **Bootable USB** | Write an ISO or IMG to a USB stick to make it bootable, like Rufus (Windows, Linux, boot tools). Back up and restore USB sticks and SD cards as `.img`. Needs administrator rights. |
+| **Storage test** | Check whether a USB stick or SD card is genuine and intact, like H2testw: fills the free space with a known pattern and reads it back, unmasking fake-capacity drives. Measures read and write speed. |
 
 ### Network
 | Tool | What it does |
 |---|---|
 | **Send to phone** | Exchange photos and files with your phone on the same Wi-Fi: scan a QR code and download or upload from the phone's browser. No app, cable or cloud. |
 | **Network & Wi-Fi** | Internet speed test, your Wi-Fi connection and nearby networks with signal and channels (with tips), devices connected to your home network. |
+| **Network security** | Reconnaissance tools with a simple interface, to learn and to check **your own** networks: port scan (with an optional nmap front-end), DNS and WHOIS lookup, traceroute, and the open ports on your PC. Each tool shows the equivalent command. |
 
 ### Utilities
 | Tool | What it does |
 |---|---|
+| **Terminal** | A real terminal with tabs: PowerShell, Command Prompt, Ubuntu (WSL) and Git Bash, with colors, selection and scrollback. Run `nmap`, `nslookup`, `sudo` (inside WSL) and any command-line tool. |
 | **QR & passwords** | QR codes for links, Wi-Fi, contacts, email and SMS, as PNG or SVG. Secure password generator and strength check, all offline. |
 | **Quick tools** | Keyboard shortcuts that work in any program: copy text from anywhere on the screen (`Win+Shift+T`), color picker (`Win+Shift+C`), pixel ruler, keep a window always on top (`Win+Ctrl+T`). |
 | **Clipboard** | History of everything you copy (text, images, files) to search and paste again; `Win+Alt+V` opens a small window to paste from any program. Content marked as private by password managers is skipped. |

@@ -85,16 +85,20 @@ FFmpeg (audio, vídeo, grabación de pantalla) y 7-Zip (creación de archivos .7
 | **Eliminación segura** | Sobrescribe archivos y carpetas antes de eliminarlos para que los programas de recuperación no los encuentren, y limpia el espacio libre de un disco. |
 | **Recuperar archivos** | *Rápido, con los nombres originales*: NTFS, FAT12/16/32 y exFAT. *Análisis profundo*: encuentra archivos por su contenido, incluso después de formatear. Solo lectura; funciona también con imágenes de disco. |
 | **Info del sistema** | Windows, CPU, RAM, tarjeta gráfica, discos con estado S.M.A.R.T., desgaste y ciclos de la batería, red y Wi-Fi, programas de inicio que puedes activar o desactivar, uso de CPU y memoria en tiempo real. |
+| **USB de arranque** | Graba una ISO o IMG en una memoria USB para hacerla de arranque, como Rufus (Windows, Linux, herramientas de arranque). Copia de seguridad y restauración de memorias USB y tarjetas SD como `.img`. Necesita privilegios de administrador. |
+| **Prueba de memoria** | Comprueba si una memoria USB o tarjeta SD es auténtica e íntegra, como H2testw: llena el espacio libre con un patrón reconocible y lo vuelve a leer, desenmascarando las memorias de capacidad falsa. Mide la velocidad de lectura y escritura. |
 
 ### Red
 | Herramienta | Qué hace |
 |---|---|
 | **Enviar al teléfono** | Intercambia fotos y archivos con el teléfono en la misma Wi-Fi: escaneas un código QR y descargas o subes desde el navegador del teléfono. Sin app, cable ni nube. |
 | **Red y Wi-Fi** | Prueba de velocidad de Internet, tu conexión Wi-Fi y las redes cercanas con señal y canales (con consejos), dispositivos conectados a la red de casa. |
+| **Seguridad de red** | Herramientas de reconocimiento con una interfaz sencilla, para aprender y comprobar **tus** redes: escaneo de puertos (con front-end de nmap opcional), consulta DNS y WHOIS, traceroute y los puertos abiertos de tu PC. Cada herramienta muestra el comando equivalente. |
 
 ### Utilidades
 | Herramienta | Qué hace |
 |---|---|
+| **Terminal** | Una terminal de verdad con pestañas: PowerShell, Símbolo del sistema, Ubuntu (WSL) y Git Bash, con colores, selección y desplazamiento. Ejecuta `nmap`, `nslookup`, `sudo` (dentro de WSL) y cualquier herramienta de línea de comandos. |
 | **QR y contraseñas** | Códigos QR para enlaces, Wi-Fi, contactos, correo y SMS, en PNG o SVG. Generador de contraseñas seguras y comprobación de su seguridad, todo sin conexión. |
 | **Herramientas rápidas** | Atajos que funcionan en cualquier programa: copiar el texto de cualquier punto de la pantalla (`Win+Shift+T`), cuentagotas (`Win+Shift+C`), regla en píxeles, ventana siempre visible (`Win+Ctrl+T`). |
 | **Portapapeles** | Historial de todo lo que copias (textos, imágenes, archivos) para buscar y pegar de nuevo; `Win+Alt+V` abre una ventanita para pegar en cualquier programa. Lo que los gestores de contraseñas marcan como privado no se guarda. |

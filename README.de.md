@@ -85,16 +85,20 @@ FFmpeg (Audio, Video, Bildschirmaufnahme) und 7-Zip (Erstellen von .7z-Archiven)
 | **Sicheres Löschen** | Überschreibt Dateien und Ordner vor dem Löschen, damit Wiederherstellungsprogramme sie nicht finden, und bereinigt den freien Speicher eines Laufwerks. |
 | **Dateiwiederherstellung** | *Schnell, mit Originalnamen*: NTFS, FAT12/16/32 und exFAT. *Tiefenscan*: findet Dateien anhand ihres Inhalts, auch nach einer Formatierung. Nur lesend; funktioniert auch mit Datenträgerabbildern. |
 | **Systeminfo** | Windows, CPU, RAM, Grafikkarte, Datenträger mit S.M.A.R.T.-Zustand, Akkuverschleiß und Ladezyklen, Netzwerk und WLAN, Autostart-Programme zum Ein- und Ausschalten, CPU- und Speicherauslastung live. |
+| **Bootfähiger USB-Stick** | Schreiben Sie eine ISO oder IMG auf einen USB-Stick, um ihn bootfähig zu machen, wie Rufus (Windows, Linux, Boot-Werkzeuge). Sichern und Wiederherstellen von USB-Sticks und SD-Karten als `.img`. Erfordert Administratorrechte. |
+| **Speichertest** | Prüfen Sie, ob ein USB-Stick oder eine SD-Karte echt und intakt ist, wie H2testw: füllt den freien Speicherplatz mit einem erkennbaren Muster und liest es zurück, um Speicher mit falscher Kapazität zu entlarven. Misst Lese- und Schreibgeschwindigkeit. |
 
 ### Netzwerk
 | Werkzeug | Funktion |
 |---|---|
 | **An Handy senden** | Fotos und Dateien mit dem Handy im selben WLAN austauschen: QR-Code scannen und im Browser des Handys herunter- oder hochladen. Ohne App, Kabel oder Cloud. |
 | **Netzwerk & WLAN** | Geschwindigkeitstest, Ihre WLAN-Verbindung und Netze in der Nähe mit Signal und Kanälen (mit Tipps), Geräte im Heimnetz. |
+| **Netzwerksicherheit** | Erkundungswerkzeuge mit einfacher Oberfläche, zum Lernen und zum Prüfen **Ihrer eigenen** Netzwerke: Portscan (mit optionalem nmap-Frontend), DNS- und WHOIS-Abfrage, Traceroute und die offenen Ports Ihres PCs. Jedes Werkzeug zeigt den entsprechenden Befehl. |
 
 ### Hilfsprogramme
 | Werkzeug | Funktion |
 |---|---|
+| **Terminal** | Ein echtes Terminal mit Registerkarten: PowerShell, Eingabeaufforderung, Ubuntu (WSL) und Git Bash, mit Farben, Auswahl und Bildlauf. Führen Sie `nmap`, `nslookup`, `sudo` (in WSL) und jedes Befehlszeilenwerkzeug aus. |
 | **QR & Passwörter** | QR-Codes für Links, WLAN, Kontakte, E-Mail und SMS, als PNG oder SVG. Generator für sichere Passwörter und Stärkeprüfung, alles offline. |
 | **Schnellwerkzeuge** | Tastenkürzel, die in jedem Programm funktionieren: Text von überall auf dem Bildschirm kopieren (`Win+Shift+T`), Farbpipette (`Win+Shift+C`), Pixel-Lineal, Fenster immer im Vordergrund (`Win+Ctrl+T`). |
 | **Zwischenablage** | Verlauf von allem, was Sie kopieren (Texte, Bilder, Dateien), zum Suchen und erneuten Einfügen; `Win+Alt+V` öffnet ein kleines Fenster zum Einfügen in jedem Programm. Von Passwort-Managern als privat markierte Inhalte werden übersprungen. |

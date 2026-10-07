@@ -85,16 +85,20 @@ FFmpeg (audio, video, registrazione dello schermo) e 7-Zip (creazione di archivi
 | **Eliminazione sicura** | Sovrascrive file e cartelle prima di eliminarli, così i programmi di recupero non li ritrovano, e pulisce lo spazio libero di un disco. |
 | **Recupero file** | *Rapido, con i nomi originali*: NTFS, FAT12/16/32 ed exFAT. *Scansione profonda*: trova i file dal contenuto, anche dopo una formattazione. Solo lettura; funziona anche sulle immagini disco. |
 | **Info sistema** | Windows, CPU, RAM, scheda video, dischi con stato S.M.A.R.T., usura e cicli della batteria, rete e Wi-Fi, programmi all'avvio da attivare o disattivare, uso di CPU e memoria in tempo reale. |
+| **USB avviabile** | Scrivi una ISO o IMG su una chiavetta per renderla avviabile, come Rufus (Windows, Linux, strumenti di avvio). Backup e ripristino di chiavette e schede SD come `.img`. Richiede i privilegi di amministratore. |
+| **Test della memoria** | Controlla se una chiavetta o scheda SD è autentica e integra, come H2testw: riempie lo spazio libero con un motivo riconoscibile e lo rilegge, smascherando le memorie farlocche. Misura la velocità in lettura e scrittura. |
 
 ### Rete
 | Strumento | Cosa fa |
 |---|---|
 | **Invia al telefono** | Scambia foto e file con il telefono sulla stessa rete Wi-Fi: inquadri un QR code e scarichi o invii dal browser del telefono. Nessuna app, cavo o cloud. |
 | **Rete e Wi-Fi** | Test di velocità di Internet, la tua connessione Wi-Fi e le reti vicine con segnale e canali (con consigli), dispositivi collegati alla rete di casa. |
+| **Sicurezza di rete** | Strumenti di ricognizione con interfaccia semplice, per imparare e controllare **le tue** reti: scansione porte (con front-end nmap opzionale), DNS e WHOIS, traceroute e porte aperte del PC. Ogni strumento mostra il comando equivalente. |
 
 ### Utilità
 | Strumento | Cosa fa |
 |---|---|
+| **Terminale** | Un vero terminale con schede: PowerShell, Prompt dei comandi, Ubuntu (WSL) e Git Bash, con colori, selezione e scorrimento. Esegui `nmap`, `nslookup`, `sudo` (dentro WSL) e qualsiasi strumento da riga di comando. |
 | **QR e password** | Codici QR per link, Wi-Fi, contatti, e-mail e SMS, in PNG o SVG. Generatore di password sicure e verifica della robustezza, tutto offline. |
 | **Strumenti rapidi** | Scorciatoie che funzionano in qualsiasi programma: copia il testo da qualunque punto dello schermo (`Win+Shift+T`), contagocce (`Win+Shift+C`), righello in pixel, finestra sempre in primo piano (`Win+Ctrl+T`). |
 | **Appunti** | Cronologia di tutto quello che copi (testi, immagini, file) da cercare e incollare di nuovo; `Win+Alt+V` apre una finestrella per incollare in qualsiasi programma. I contenuti che i password manager segnano come privati non vengono salvati. |

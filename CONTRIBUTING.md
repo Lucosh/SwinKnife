@@ -27,7 +27,7 @@ Useful command-line options of `SwinKnife.exe`:
 | Option | Effect |
 |---|---|
 | `"<file>"` | opens the file in the right tool |
-| `--page <tool>` | opens a tool: `viewer`, `search`, `convert`, `pdf`, `translate`, `compare`, `archive`, `photo`, `batch`, `bgremove`, `video`, `capture`, `rename`, `disk`, `dupes`, `clean`, `uninstall`, `shred`, `recovery`, `sysinfo`, `phone`, `network`, `quick`, `clipboard`, `qr`, `gemini`, `settings` |
+| `--page <tool>` | opens a tool: `viewer`, `search`, `convert`, `pdf`, `translate`, `compare`, `archive`, `photo`, `batch`, `bgremove`, `video`, `capture`, `rename`, `disk`, `dupes`, `clean`, `uninstall`, `shred`, `recovery`, `sysinfo`, `usb`, `storagetest`, `phone`, `network`, `security`, `terminal`, `quick`, `clipboard`, `qr`, `gemini`, `settings` |
 | `--action compress-pdf\|ocr-pdf\|gemini\|extract-here "<file>"` | runs an action directly (used by the right-click menu) |
 | `--tray` | starts hidden in the notification area (used by "Start with Windows") |
 | `--register-shell` / `--unregister-shell` | adds or removes the right-click menu without opening the window (used by the installer) |

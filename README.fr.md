@@ -85,16 +85,20 @@ FFmpeg (audio, vidéo, enregistrement de l'écran) et 7-Zip (création d'archive
 | **Suppression sécurisée** | Écrase fichiers et dossiers avant de les supprimer pour que les outils de récupération ne les retrouvent pas, et nettoie l'espace libre d'un disque. |
 | **Récupération de fichiers** | *Rapide, avec les noms d'origine* : NTFS, FAT12/16/32 et exFAT. *Analyse approfondie* : retrouve les fichiers d'après leur contenu, même après un formatage. Lecture seule ; fonctionne aussi sur des images disque. |
 | **Infos système** | Windows, CPU, RAM, carte graphique, disques avec état S.M.A.R.T., usure et cycles de la batterie, réseau et Wi-Fi, programmes au démarrage à activer ou désactiver, utilisation du CPU et de la mémoire en temps réel. |
+| **Clé USB amorçable** | Écrivez une ISO ou IMG sur une clé USB pour la rendre amorçable, comme Rufus (Windows, Linux, outils de démarrage). Sauvegarde et restauration de clés USB et cartes SD en `.img`. Nécessite des droits d'administrateur. |
+| **Test de la mémoire** | Vérifiez si une clé USB ou une carte SD est authentique et intacte, comme H2testw : remplit l'espace libre avec un motif reconnaissable et le relit, pour démasquer les mémoires à fausse capacité. Mesure la vitesse de lecture et d'écriture. |
 
 ### Réseau
 | Outil | Ce qu'il fait |
 |---|---|
 | **Envoyer au téléphone** | Échangez photos et fichiers avec votre téléphone sur le même Wi-Fi : scannez un QR code et téléchargez ou envoyez depuis le navigateur du téléphone. Sans application, câble ni cloud. |
 | **Réseau et Wi-Fi** | Test de vitesse Internet, votre connexion Wi-Fi et les réseaux voisins avec signal et canaux (avec conseils), appareils connectés au réseau domestique. |
+| **Sécurité réseau** | Outils de reconnaissance avec une interface simple, pour apprendre et contrôler **vos** réseaux : analyse de ports (avec un front-end nmap en option), requêtes DNS et WHOIS, traceroute et les ports ouverts de votre PC. Chaque outil affiche la commande équivalente. |
 
 ### Utilitaires
 | Outil | Ce qu'il fait |
 |---|---|
+| **Terminal** | Un vrai terminal avec onglets : PowerShell, Invite de commandes, Ubuntu (WSL) et Git Bash, avec couleurs, sélection et défilement. Exécutez `nmap`, `nslookup`, `sudo` (dans WSL) et n'importe quel outil en ligne de commande. |
 | **QR et mots de passe** | QR codes pour liens, Wi-Fi, contacts, e-mail et SMS, en PNG ou SVG. Générateur de mots de passe sûrs et vérification de leur robustesse, entièrement hors ligne. |
 | **Outils rapides** | Raccourcis qui fonctionnent dans n'importe quel programme : copier le texte de n'importe quel endroit de l'écran (`Win+Shift+T`), pipette (`Win+Shift+C`), règle en pixels, fenêtre toujours au premier plan (`Win+Ctrl+T`). |
 | **Presse-papiers** | Historique de tout ce que vous copiez (textes, images, fichiers) à retrouver et coller à nouveau ; `Win+Alt+V` ouvre une petite fenêtre pour coller dans n'importe quel programme. Les contenus marqués comme privés par les gestionnaires de mots de passe sont ignorés. |

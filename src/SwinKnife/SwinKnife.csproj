@@ -14,7 +14,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyName>SwinKnife</AssemblyName>
     <RootNamespace>SwinKnife</RootNamespace>
-    <Version>0.8.0</Version>
+    <Version>0.9.0</Version>
     <Product>SwinKnife</Product>
     <Description>Il coltellino svizzero per Windows</Description>
     <SatelliteResourceLanguages>it;en;de;es;fr</SatelliteResourceLanguages>
@@ -36,6 +36,8 @@
     <PackageReference Include="QRCoder" Version="1.8.0" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
     <PackageReference Include="System.Management" Version="10.0.12" />
+    <PackageReference Include="System.Speech" Version="10.0.0" />
+    <PackageReference Include="ZXing.Net" Version="0.16.10" />
   </ItemGroup>
 
   <ItemGroup>

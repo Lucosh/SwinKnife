@@ -14,7 +14,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyName>SwinKnife</AssemblyName>
     <RootNamespace>SwinKnife</RootNamespace>
-    <Version>0.9.0</Version>
+    <Version>0.10.0</Version>
     <Product>SwinKnife</Product>
     <Description>Il coltellino svizzero per Windows</Description>
     <SatelliteResourceLanguages>it;en;de;es;fr</SatelliteResourceLanguages>
